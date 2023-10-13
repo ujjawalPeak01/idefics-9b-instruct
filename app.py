@@ -14,7 +14,7 @@ class InferlessPythonModel:
     # Function to perform inference 
     def infer(self, inputs):
         prompt = inputs["prompt"]
-        pipeline_output = self.generator(prompt, do_sample=True)
+        pipeline_output = self.generator(prompt, do_sample=True, max_new_tokens=200)
         generated_txt = pipeline_output[0]["generated_text"]
         print("Text: ", generated_txt)
 
