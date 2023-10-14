@@ -15,12 +15,8 @@ class InferlessPythonModel:
     
     # Function to perform inference 
     def infer(self, inputs):
-        prompts = [
-            [
-                "https://upload.wikimedia.org/wikipedia/commons/8/86/Id%C3%A9fix.JPG",
-                "In this picture from Asterix and Obelix, we can see"
-            ],
-        ]
+        print(inputs["prompts"])
+        prompts = [[inputs["prompts"]]]
         inputs = self.processor(prompts, return_tensors="pt").to("cuda")
         bad_words_ids = self.processor.tokenizer(["<image>", "<fake_token_around_image>"], add_special_tokens=False).input_ids
 
