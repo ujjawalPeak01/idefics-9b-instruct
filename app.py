@@ -15,13 +15,11 @@ class InferlessPythonModel:
     
     # Function to perform inference 
     def infer(self, inputs):
-        print(inputs)
-        print(inputs["prompts"])
         prompts = [[inputs["prompts"]]]
         inputs = self.processor(prompts, return_tensors="pt").to("cuda")
         bad_words_ids = self.processor.tokenizer(["<image>", "<fake_token_around_image>"], add_special_tokens=False).input_ids
 
-        generated_ids = self.model.generate(**inputs, bad_words_ids=bad_words_ids, max_length=100)
+        generated_ids = self.model.generate(**inputs, bad_words_ids=bad_words_ids, max_length=500)
         generated_text = self.processor.batch_decode(generated_ids, skip_special_tokens=True)
         final_result = ""
         for i, t in enumerate(generated_text):
