@@ -15,6 +15,7 @@ class InferlessPythonModel:
     
     # Function to perform inference 
     def infer(self, inputs):
+        print(inputs)
         print(inputs["prompts"])
         prompts = [[inputs["prompts"]]]
         inputs = self.processor(prompts, return_tensors="pt").to("cuda")
